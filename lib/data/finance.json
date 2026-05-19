@@ -1,0 +1,155 @@
+{
+  "invoices": [
+    {
+      "id": "INV-2024-001",
+      "client": "Apex Properties LLC",
+      "project": "Skyline Tower Residences",
+      "amount": 850000,
+      "tax": 76500,
+      "total": 926500,
+      "status": "Paid",
+      "issueDate": "2024-01-31",
+      "dueDate": "2024-02-29",
+      "paidDate": "2024-02-25",
+      "type": "Progress Billing"
+    },
+    {
+      "id": "INV-2024-002",
+      "client": "TechCorp Industries",
+      "project": "Greenfield Office Complex",
+      "amount": 1200000,
+      "tax": 108000,
+      "total": 1308000,
+      "status": "Paid",
+      "issueDate": "2024-03-31",
+      "dueDate": "2024-04-30",
+      "paidDate": "2024-04-28",
+      "type": "Progress Billing"
+    },
+    {
+      "id": "INV-2024-003",
+      "client": "Golden Gate Developers",
+      "project": "Riverside Luxury Villas",
+      "amount": 450000,
+      "tax": 40500,
+      "total": 490500,
+      "status": "Pending",
+      "issueDate": "2024-05-15",
+      "dueDate": "2024-06-14",
+      "paidDate": null,
+      "type": "Progress Billing"
+    },
+    {
+      "id": "INV-2024-004",
+      "client": "Luxury Hospitality Group",
+      "project": "The Grand Hotel",
+      "amount": 2100000,
+      "tax": 189000,
+      "total": 2289000,
+      "status": "Overdue",
+      "issueDate": "2024-04-01",
+      "dueDate": "2024-05-01",
+      "paidDate": null,
+      "type": "Milestone"
+    },
+    {
+      "id": "INV-2024-005",
+      "client": "City Transit Authority",
+      "project": "Metro Station Renovation",
+      "amount": 320000,
+      "tax": 28800,
+      "total": 348800,
+      "status": "Paid",
+      "issueDate": "2024-04-15",
+      "dueDate": "2024-05-15",
+      "paidDate": "2024-05-12",
+      "type": "Progress Billing"
+    },
+    {
+      "id": "INV-2024-006",
+      "client": "Retail Giants Co.",
+      "project": "Harbor View Mall",
+      "amount": 280000,
+      "tax": 25200,
+      "total": 305200,
+      "status": "Pending",
+      "issueDate": "2024-05-20",
+      "dueDate": "2024-06-19",
+      "paidDate": null,
+      "type": "Advance"
+    },
+    {
+      "id": "INV-2024-007",
+      "client": "GreenEnergy Corp",
+      "project": "Solar Farm Installation",
+      "amount": 650000,
+      "tax": 58500,
+      "total": 708500,
+      "status": "Paid",
+      "issueDate": "2024-05-01",
+      "dueDate": "2024-05-31",
+      "paidDate": "2024-05-29",
+      "type": "Milestone"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "EXP-2024-001",
+      "category": "Materials",
+      "description": "Cement & Steel purchase - Skyline Tower",
+      "amount": 245000,
+      "date": "2024-05-10",
+      "project": "PRJ-001",
+      "status": "Approved",
+      "approvedBy": "James Wilson"
+    },
+    {
+      "id": "EXP-2024-002",
+      "category": "Labor",
+      "description": "Sub-contractor payment - foundation work",
+      "amount": 180000,
+      "date": "2024-05-12",
+      "project": "PRJ-002",
+      "status": "Approved",
+      "approvedBy": "Sarah Chen"
+    },
+    {
+      "id": "EXP-2024-003",
+      "category": "Equipment",
+      "description": "Tower crane rental - Q2",
+      "amount": 85000,
+      "date": "2024-05-15",
+      "project": "PRJ-001",
+      "status": "Approved",
+      "approvedBy": "James Wilson"
+    },
+    {
+      "id": "EXP-2024-004",
+      "category": "Utilities",
+      "description": "Site electricity & water - all projects",
+      "amount": 12500,
+      "date": "2024-05-20",
+      "project": "General",
+      "status": "Pending",
+      "approvedBy": null
+    },
+    {
+      "id": "EXP-2024-005",
+      "category": "Safety",
+      "description": "PPE bulk purchase Q2",
+      "amount": 8200,
+      "date": "2024-05-22",
+      "project": "General",
+      "status": "Approved",
+      "approvedBy": "Robert Martinez"
+    }
+  ],
+  "monthlyRevenue": [
+    { "month": "Jan", "revenue": 926500, "expenses": 580000, "profit": 346500 },
+    { "month": "Feb", "revenue": 740000, "expenses": 420000, "profit": 320000 },
+    { "month": "Mar", "revenue": 1308000, "expenses": 890000, "profit": 418000 },
+    { "month": "Apr", "revenue": 1850000, "expenses": 1200000, "profit": 650000 },
+    { "month": "May", "revenue": 2180000, "expenses": 1450000, "profit": 730000 },
+    { "month": "Jun", "revenue": 1620000, "expenses": 980000, "profit": 640000 }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "payrollPeriods": [
+    {
+      "id": "PAY-2024-05",
+      "period": "May 2024",
+      "startDate": "2024-05-01",
+      "endDate": "2024-05-31",
+      "status": "Processing",
+      "totalGross": 892500,
+      "totalDeductions": 178500,
+      "totalNet": 714000,
+      "employeeCount": 12,
+      "processedBy": "Anna Thompson"
+    },
+    {
+      "id": "PAY-2024-04",
+      "period": "April 2024",
+      "startDate": "2024-04-01",
+      "endDate": "2024-04-30",
+      "status": "Paid",
+      "totalGross": 892500,
+      "totalDeductions": 178500,
+      "totalNet": 714000,
+      "employeeCount": 12,
+      "processedBy": "Anna Thompson"
+    },
+    {
+      "id": "PAY-2024-03",
+      "period": "March 2024",
+      "startDate": "2024-03-01",
+      "endDate": "2024-03-31",
+      "status": "Paid",
+      "totalGross": 870000,
+      "totalDeductions": 174000,
+      "totalNet": 696000,
+      "employeeCount": 11,
+      "processedBy": "Anna Thompson"
+    }
+  ],
+  "payrollItems": [
+    {
+      "employeeId": "EMP-001",
+      "employeeName": "James Wilson",
+      "department": "Management",
+      "basicSalary": 7916.67,
+      "overtime": 1200,
+      "allowances": 800,
+      "grossPay": 9916.67,
+      "taxDeduction": 1983.33,
+      "socialSecurity": 614.83,
+      "healthInsurance": 250,
+      "totalDeductions": 2848.16,
+      "netPay": 7068.51,
+      "bankAccount": "****4521",
+      "status": "Pending"
+    },
+    {
+      "employeeId": "EMP-002",
+      "employeeName": "Sarah Chen",
+      "department": "Management",
+      "basicSalary": 9166.67,
+      "overtime": 0,
+      "allowances": 1000,
+      "grossPay": 10166.67,
+      "taxDeduction": 2540.67,
+      "socialSecurity": 630.33,
+      "healthInsurance": 280,
+      "totalDeductions": 3451,
+      "netPay": 6715.67,
+      "bankAccount": "****8834",
+      "status": "Pending"
+    },
+    {
+      "employeeId": "EMP-003",
+      "employeeName": "Michael Torres",
+      "department": "Engineering",
+      "basicSalary": 6000,
+      "overtime": 850,
+      "allowances": 600,
+      "grossPay": 7450,
+      "taxDeduction": 1192,
+      "socialSecurity": 461.9,
+      "healthInsurance": 220,
+      "totalDeductions": 1873.9,
+      "netPay": 5576.1,
+      "bankAccount": "****2267",
+      "status": "Pending"
+    },
+    {
+      "employeeId": "EMP-004",
+      "employeeName": "Emily Rodriguez",
+      "department": "Management",
+      "basicSalary": 7333.33,
+      "overtime": 960,
+      "allowances": 750,
+      "grossPay": 9043.33,
+      "taxDeduction": 1808.67,
+      "socialSecurity": 560.69,
+      "healthInsurance": 250,
+      "totalDeductions": 2619.36,
+      "netPay": 6423.97,
+      "bankAccount": "****9901",
+      "status": "Pending"
+    }
+  ],
+  "monthlyPayrollTrend": [
+    { "month": "Jan", "gross": 840000, "net": 672000 },
+    { "month": "Feb", "gross": 840000, "net": 672000 },
+    { "month": "Mar", "gross": 870000, "net": 696000 },
+    { "month": "Apr", "gross": 892500, "net": 714000 },
+    { "month": "May", "gross": 892500, "net": 714000 },
+    { "month": "Jun", "gross": 920000, "net": 736000 }
+  ]
+}
