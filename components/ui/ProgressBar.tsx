@@ -1,31 +1,31 @@
 import { cn } from '@/lib/utils'
 
-interface ProgressBarProps {
+export default function ProgressBar({
+  value,
+  showLabel = true,
+  size = 'sm',
+  color,
+}: {
   value: number
-  className?: string
   showLabel?: boolean
+  size?: 'xs' | 'sm' | 'md'
   color?: string
-}
-
-export default function ProgressBar({ value, className, showLabel = true, color }: ProgressBarProps) {
-  const getColor = () => {
-    if (color) return color
-    if (value >= 80) return 'bg-green-500'
-    if (value >= 50) return 'bg-primary-500'
-    if (value >= 25) return 'bg-yellow-500'
-    return 'bg-red-500'
-  }
+}) {
+  const h = size === 'xs' ? 'h-1' : size === 'sm' ? 'h-1.5' : 'h-2.5'
+  const clr = color ?? (value >= 80 ? 'bg-emerald-500' : value >= 50 ? 'bg-orange-500' : value >= 25 ? 'bg-amber-500' : 'bg-red-500')
 
   return (
-    <div className={cn('flex items-center gap-3', className)}>
-      <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+    <div className="flex items-center gap-2.5">
+      <div className={cn('flex-1 bg-slate-100 rounded-full overflow-hidden', h)}>
         <div
-          className={cn('h-full rounded-full progress-bar', getColor())}
-          style={{ width: `${value}%` }}
+          className={cn('h-full rounded-full transition-all duration-700', clr)}
+          style={{ width: `${Math.min(value, 100)}%` }}
         />
       </div>
       {showLabel && (
-        <span className="text-xs font-medium text-slate-600 w-8 text-right">{value}%</span>
+        <span className="text-xs font-semibold text-slate-600 w-8 text-right tabular-nums">
+          {value}%
+        </span>
       )}
     </div>
   )

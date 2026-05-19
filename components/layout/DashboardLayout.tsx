@@ -1,20 +1,20 @@
 import Sidebar from './Sidebar'
 import Header from './Header'
 
-interface DashboardLayoutProps {
-  children: React.ReactNode
-  title: string
-  subtitle?: string
-}
-
-export default function DashboardLayout({ children, title, subtitle }: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-slate-100">
+    <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
       <Sidebar />
-      <div className="flex-1 ml-[260px] flex flex-col min-h-screen">
-        <Header title={title} subtitle={subtitle} />
-        <main className="flex-1 p-6">{children}</main>
-      </div>
+      <Header />
+      <main
+        className="min-h-screen"
+        style={{
+          marginLeft: 'var(--sidebar-w)',
+          paddingTop: 'var(--header-h)',
+        }}
+      >
+        <div className="p-6">{children}</div>
+      </main>
     </div>
   )
 }

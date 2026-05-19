@@ -3,56 +3,26 @@ import PageHeader from '@/components/ui/PageHeader'
 import StatCard from '@/components/ui/StatCard'
 import RevenueChart from '@/components/dashboard/RevenueChart'
 import ProjectStatusChart from '@/components/dashboard/ProjectStatusChart'
+import ProgressBar from '@/components/ui/ProgressBar'
 import { formatCurrency } from '@/lib/utils'
-import { BarChart3, Download, FileText, TrendingUp, DollarSign, Users, Package } from 'lucide-react'
+import {
+  BarChart3, Download, FileText, TrendingUp, DollarSign,
+  Users, Package, Calendar, ArrowDownToLine, Eye,
+} from 'lucide-react'
 import financeData from '@/lib/data/finance.json'
 import projectsData from '@/lib/data/projects.json'
 import employeesData from '@/lib/data/employees.json'
 import inventoryData from '@/lib/data/inventory.json'
 
-const reportTypes = [
-  {
-    icon: FileText,
-    title: 'Project Progress Report',
-    description: 'Status and completion of all projects',
-    updated: '2 hours ago',
-    color: 'bg-blue-100 text-blue-600',
-  },
-  {
-    icon: DollarSign,
-    title: 'Financial Summary',
-    description: 'Revenue, expenses and profit analysis',
-    updated: '1 hour ago',
-    color: 'bg-green-100 text-green-600',
-  },
-  {
-    icon: Users,
-    title: 'HR & Payroll Report',
-    description: 'Employee attendance, performance & payroll',
-    updated: '4 hours ago',
-    color: 'bg-purple-100 text-purple-600',
-  },
-  {
-    icon: Package,
-    title: 'Inventory Audit',
-    description: 'Stock levels, usage and reorder needs',
-    updated: '1 day ago',
-    color: 'bg-orange-100 text-orange-600',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Budget vs Actual',
-    description: 'Cost tracking across all active projects',
-    updated: '3 hours ago',
-    color: 'bg-pink-100 text-pink-600',
-  },
-  {
-    icon: BarChart3,
-    title: 'Executive Dashboard',
-    description: 'High-level KPIs for leadership review',
-    updated: '30 min ago',
-    color: 'bg-primary-100 text-primary-600',
-  },
+const REPORT_LIST = [
+  { icon: FileText, title: 'Project Progress Report', desc: 'Completion status and milestones', tag: 'Projects', color: 'bg-blue-100 text-blue-600', updated: '2h ago' },
+  { icon: DollarSign, title: 'Financial Summary', desc: 'Revenue, expenses & profit analysis', tag: 'Finance', color: 'bg-green-100 text-green-600', updated: '1h ago' },
+  { icon: Users, title: 'HR & Payroll Report', desc: 'Attendance, performance & payroll', tag: 'HR', color: 'bg-purple-100 text-purple-600', updated: '4h ago' },
+  { icon: Package, title: 'Inventory Audit Report', desc: 'Stock levels, usage & reorder status', tag: 'Warehouse', color: 'bg-amber-100 text-amber-600', updated: '1d ago' },
+  { icon: TrendingUp, title: 'Budget vs Actual', desc: 'Cost variance across all projects', tag: 'Finance', color: 'bg-orange-100 text-orange-600', updated: '3h ago' },
+  { icon: BarChart3, title: 'Executive Dashboard', desc: 'High-level KPIs for leadership', tag: 'Management', color: 'bg-teal-100 text-teal-600', updated: '30m ago' },
+  { icon: FileText, title: 'Client Statement', desc: 'Outstanding balances by client', tag: 'Finance', color: 'bg-pink-100 text-pink-600', updated: '2d ago' },
+  { icon: Calendar, title: 'Site Activity Log', desc: 'Daily activities across all sites', tag: 'Projects', color: 'bg-indigo-100 text-indigo-600', updated: '6h ago' },
 ]
 
 export default function ReportsPage() {
@@ -62,140 +32,105 @@ export default function ReportsPage() {
   const totalSpent = projectsData.reduce((s, p) => s + p.spent, 0)
 
   return (
-    <DashboardLayout title="Reports" subtitle="Analytics and business intelligence">
+    <DashboardLayout>
       <PageHeader
         title="Reports & Analytics"
-        description="Comprehensive business performance reports"
+        description="Business intelligence and performance reporting"
         actions={
-          <button className="flex items-center gap-2 px-4 py-2 text-sm bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors font-medium">
-            <Download className="w-4 h-4" /> Export All
-          </button>
+          <button className="btn-primary"><Download className="w-4 h-4" /> Export All Reports</button>
         }
       />
 
-      {/* KPIs */}
+      {/* KPI row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <StatCard
-          title="YTD Revenue"
-          value={formatCurrency(totalRevenue)}
-          change="↑ 12% vs last year"
-          changeType="up"
-          icon={TrendingUp}
-          iconColor="text-green-600"
-          iconBg="bg-green-100"
-        />
-        <StatCard
-          title="Net Profit"
-          value={formatCurrency(totalProfit)}
-          change={`${Math.round((totalProfit / totalRevenue) * 100)}% margin`}
-          changeType="up"
-          icon={DollarSign}
-          iconColor="text-primary-600"
-          iconBg="bg-primary-100"
-        />
-        <StatCard
-          title="Budget Utilization"
-          value={`${Math.round((totalSpent / totalBudget) * 100)}%`}
-          change={`${formatCurrency(totalBudget - totalSpent)} remaining`}
-          changeType="neutral"
-          icon={BarChart3}
-          iconColor="text-blue-600"
-          iconBg="bg-blue-100"
-        />
-        <StatCard
-          title="Workforce"
-          value={employeesData.filter(e => e.status === 'Active').length}
-          change={`${Math.round(employeesData.reduce((s,e) => s + e.attendance, 0) / employeesData.length)}% avg attendance`}
-          changeType="up"
-          icon={Users}
-          iconColor="text-purple-600"
-          iconBg="bg-purple-100"
-        />
+        <StatCard title="YTD Revenue" value={formatCurrency(totalRevenue)} change="↑ 12% vs last year" trend="up" icon={TrendingUp} gradient="gradient-green" />
+        <StatCard title="Net Profit" value={formatCurrency(totalProfit)} subtitle={`${Math.round((totalProfit / totalRevenue) * 100)}% margin`} trend="up" icon={DollarSign} gradient="gradient-orange" />
+        <StatCard title="Budget Used" value={`${Math.round((totalSpent / totalBudget) * 100)}%`} subtitle={`${formatCurrency(totalBudget - totalSpent)} remaining`} icon={BarChart3} gradient="gradient-blue" />
+        <StatCard title="Active Staff" value={employeesData.filter(e => e.status === 'Active').length} subtitle="Avg attendance 96%" trend="up" icon={Users} gradient="gradient-purple" />
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div className="lg:col-span-2 bg-white rounded-xl p-5 shadow-card border border-slate-100">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+        <div className="lg:col-span-2 card p-5">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-semibold text-slate-800">Revenue vs Expenses Trend</h3>
-              <p className="text-xs text-slate-400">January – June 2024</p>
+              <h3 className="font-bold text-slate-800">Revenue vs Expenses</h3>
+              <p className="text-xs text-slate-400 mt-0.5">Jan–Jun 2024 monthly performance</p>
             </div>
-            <button className="flex items-center gap-1.5 text-xs text-slate-500 border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-slate-50 transition-colors">
-              <Download className="w-3.5 h-3.5" /> Export
-            </button>
+            <button className="btn-secondary text-xs py-1.5"><ArrowDownToLine className="w-3.5 h-3.5" /> Export</button>
           </div>
           <RevenueChart data={financeData.monthlyRevenue} />
         </div>
-
-        <div className="bg-white rounded-xl p-5 shadow-card border border-slate-100">
+        <div className="card p-5">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-semibold text-slate-800">Projects by Status</h3>
-              <p className="text-xs text-slate-400">Current distribution</p>
+              <h3 className="font-bold text-slate-800">Project Status</h3>
+              <p className="text-xs text-slate-400 mt-0.5">Current distribution</p>
             </div>
           </div>
           <ProjectStatusChart projects={projectsData} />
         </div>
       </div>
 
-      {/* Budget vs Actual table */}
-      <div className="bg-white rounded-xl shadow-card border border-slate-100 mb-6">
-        <div className="flex items-center justify-between p-5 border-b border-slate-100">
+      {/* Budget vs Actual */}
+      <div className="card mb-6">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
           <div>
-            <h3 className="font-semibold text-slate-800">Budget vs Actual by Project</h3>
-            <p className="text-xs text-slate-400">Cost performance across all projects</p>
+            <h3 className="font-bold text-slate-800">Budget vs Actual — All Projects</h3>
+            <p className="text-xs text-slate-400 mt-0.5">Cost performance and variance tracking</p>
           </div>
-          <button className="flex items-center gap-1.5 text-xs text-slate-500 border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-slate-50 transition-colors">
-            <Download className="w-3.5 h-3.5" /> Export
-          </button>
+          <button className="btn-secondary text-xs py-1.5"><ArrowDownToLine className="w-3.5 h-3.5" /> Export CSV</button>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-100">
-                {['Project', 'Type', 'Budget', 'Spent', 'Remaining', 'Utilization', 'Status'].map(h => (
-                  <th key={h} className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wide py-3 px-4 first:pl-6 whitespace-nowrap">
-                    {h}
-                  </th>
+              <tr>
+                {['Project', 'Type', 'Budget', 'Actual Spend', 'Remaining', 'Variance', 'Utilization', 'Status'].map(h => (
+                  <th key={h} className="table-head first:pl-5 whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {projectsData.map((p) => {
+              {projectsData.map(p => {
                 const util = Math.round((p.spent / p.budget) * 100)
-                const remaining = p.budget - p.spent
+                const variance = p.budget - p.spent
+                const overBudget = variance < 0
                 return (
-                  <tr key={p.id} className="border-b border-slate-50 hover:bg-slate-50 transition-colors last:border-0">
-                    <td className="py-3.5 px-4 pl-6">
-                      <p className="font-medium text-slate-800">{p.name}</p>
-                      <p className="text-xs text-slate-400">{p.id}</p>
+                  <tr key={p.id} className="table-row">
+                    <td className="table-cell pl-5">
+                      <p className="font-semibold text-slate-800 text-[13px]">{p.name}</p>
+                      <p className="text-[11px] text-slate-400 font-mono">{p.id}</p>
                     </td>
-                    <td className="py-3.5 px-4 text-xs text-slate-500">{p.type}</td>
-                    <td className="py-3.5 px-4 font-medium text-slate-700">{formatCurrency(p.budget)}</td>
-                    <td className="py-3.5 px-4 font-medium text-slate-700">{formatCurrency(p.spent)}</td>
-                    <td className="py-3.5 px-4">
-                      <span className={remaining < 0 ? 'text-red-600 font-semibold' : 'text-green-600 font-medium'}>
-                        {remaining < 0 ? '-' : ''}{formatCurrency(Math.abs(remaining))}
+                    <td className="table-cell text-[12px] text-slate-500">{p.type}</td>
+                    <td className="table-cell font-semibold text-slate-800">{formatCurrency(p.budget)}</td>
+                    <td className="table-cell font-semibold text-slate-700">{formatCurrency(p.spent)}</td>
+                    <td className="table-cell">
+                      <span className={`font-bold text-[13px] ${overBudget ? 'text-red-600' : 'text-emerald-600'}`}>
+                        {overBudget ? '-' : '+'}{formatCurrency(Math.abs(variance))}
                       </span>
                     </td>
-                    <td className="py-3.5 px-4">
-                      <div className="flex items-center gap-2">
-                        <div className="w-20 h-1.5 bg-slate-100 rounded-full">
-                          <div
-                            className={`h-full rounded-full ${util > 100 ? 'bg-red-500' : util > 80 ? 'bg-yellow-500' : 'bg-green-500'}`}
-                            style={{ width: `${Math.min(util, 100)}%` }}
-                          />
-                        </div>
-                        <span className="text-xs font-medium text-slate-600">{util}%</span>
-                      </div>
+                    <td className="table-cell">
+                      <span className={`text-[12px] font-semibold px-2 py-0.5 rounded-full ${
+                        overBudget ? 'bg-red-100 text-red-700'
+                        : util > 80 ? 'bg-amber-100 text-amber-700'
+                        : 'bg-emerald-100 text-emerald-700'
+                      }`}>
+                        {overBudget ? 'Over budget' : util > 80 ? 'Near limit' : 'On track'}
+                      </span>
                     </td>
-                    <td className="py-3.5 px-4">
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                        p.status === 'Completed' ? 'bg-green-100 text-green-700' :
-                        p.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                        p.status === 'On Hold' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-purple-100 text-purple-700'
+                    <td className="table-cell" style={{ minWidth: 140 }}>
+                      <ProgressBar
+                        value={Math.min(util, 100)}
+                        color={util > 100 ? 'bg-red-500' : util > 80 ? 'bg-amber-500' : 'bg-emerald-500'}
+                        size="sm"
+                      />
+                    </td>
+                    <td className="table-cell">
+                      <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                        p.status === 'Completed' ? 'bg-emerald-100 text-emerald-700'
+                        : p.status === 'In Progress' ? 'bg-blue-100 text-blue-700'
+                        : p.status === 'On Hold' ? 'bg-amber-100 text-amber-700'
+                        : 'bg-purple-100 text-purple-700'
                       }`}>{p.status}</span>
                     </td>
                   </tr>
@@ -206,25 +141,27 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      {/* Report templates */}
+      {/* Report templates grid */}
       <div>
-        <h3 className="font-semibold text-slate-800 mb-4">Available Reports</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {reportTypes.map((rt) => {
-            const Icon = rt.icon
+        <h3 className="font-bold text-slate-800 mb-4">Available Reports</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {REPORT_LIST.map(r => {
+            const Icon = r.icon
             return (
-              <div key={rt.title} className="bg-white rounded-xl p-5 shadow-card border border-slate-100 hover:border-primary-200 transition-all card-hover flex items-start gap-4 cursor-pointer">
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${rt.color}`}>
-                  <Icon className="w-5 h-5" />
+              <div key={r.title} className="card p-4 hover:border-orange-300 hover:shadow-card-md transition-all cursor-pointer group">
+                <div className="flex items-center justify-between mb-3">
+                  <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${r.color}`}>
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">{r.tag}</span>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-slate-800 text-sm">{rt.title}</h4>
-                  <p className="text-xs text-slate-400 mt-0.5 mb-2">{rt.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-slate-400">Updated {rt.updated}</span>
-                    <button className="text-xs text-primary-600 hover:underline font-medium flex items-center gap-1">
-                      <Download className="w-3 h-3" /> Export
-                    </button>
+                <h4 className="font-semibold text-slate-800 text-[13px] group-hover:text-orange-600 transition-colors mb-1">{r.title}</h4>
+                <p className="text-[11px] text-slate-400 mb-3">{r.desc}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] text-slate-400">Updated {r.updated}</span>
+                  <div className="flex items-center gap-1">
+                    <button className="w-6 h-6 rounded hover:bg-blue-50 flex items-center justify-center"><Eye className="w-3 h-3 text-blue-500" /></button>
+                    <button className="w-6 h-6 rounded hover:bg-slate-100 flex items-center justify-center"><Download className="w-3 h-3 text-slate-500" /></button>
                   </div>
                 </div>
               </div>
