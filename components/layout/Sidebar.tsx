@@ -34,6 +34,7 @@ const NAV: { group: string; items: NavItem[] }[] = [
         href: '/projects', label: 'Projects', icon: FolderKanban,
         children: [
           { href: '/projects', label: 'All Projects' },
+          { href: '/projects/pipeline', label: 'Pipeline & Deals' },
           { href: '/projects/sites', label: 'Construction Sites' },
           { href: '/projects/tasks', label: 'Task Management' },
           { href: '/projects/milestones', label: 'Milestones' },
