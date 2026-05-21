@@ -2,7 +2,7 @@
 
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import PageHeader from '@/components/ui/PageHeader'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, getPriorityBadgeColor } from '@/lib/utils'
 import {
   Plus, MessageSquare, Clock, FileCheck, Handshake,
   CheckCircle2, Briefcase, ChevronRight, User, Calendar,
@@ -50,11 +50,6 @@ const STAGES: { id: Stage; label: string; icon: React.ElementType; color: string
   { id: 'Completed', label: 'Completed', icon: Handshake, color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', badgeBg: 'bg-green-200 text-green-800' },
 ]
 
-const PRIORITY_COLORS: Record<string, string> = {
-  High: 'bg-red-100 text-red-700',
-  Medium: 'bg-amber-100 text-amber-700',
-  Low: 'bg-slate-100 text-slate-600',
-}
 
 export default function ProjectPipelinePage() {
   const totalPipelineValue = PIPELINE.filter(p => p.stage !== 'Completed').reduce((s, p) => s + p.estimatedValue, 0)
@@ -151,7 +146,7 @@ export default function ProjectPipelinePage() {
                     </div>
 
                     <div className="flex items-center gap-1.5 mb-2">
-                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${PRIORITY_COLORS[proj.priority]}`}>{proj.priority}</span>
+                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${getPriorityBadgeColor(proj.priority)}`}>{proj.priority}</span>
                       <span className="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-full">{proj.type}</span>
                     </div>
 
@@ -237,7 +232,7 @@ export default function ProjectPipelinePage() {
                     </td>
                     <td className="table-cell font-bold text-[12px] text-slate-800">{formatCurrency(proj.estimatedValue)}</td>
                     <td className="table-cell">
-                      <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${PRIORITY_COLORS[proj.priority]}`}>{proj.priority}</span>
+                      <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${getPriorityBadgeColor(proj.priority)}`}>{proj.priority}</span>
                     </td>
                     <td className="table-cell text-[12px] text-slate-600">{proj.assignedTo}</td>
                     <td className="table-cell text-[12px] text-slate-500 whitespace-nowrap">

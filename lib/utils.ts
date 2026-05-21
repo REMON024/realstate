@@ -59,3 +59,18 @@ export function getPriorityColor(priority: string): string {
   }
   return map[priority] ?? 'text-gray-500'
 }
+
+export function getPriorityBadgeColor(priority: string): string {
+  const map: Record<string, string> = {
+    High:   'bg-red-100 text-red-700',
+    Medium: 'bg-amber-100 text-amber-700',
+    Low:    'bg-slate-100 text-slate-600',
+  }
+  return map[priority] ?? 'bg-slate-100 text-slate-600'
+}
+
+export function offsetDate(dateStr: string, days: number): string {
+  const d = new Date(dateStr)
+  d.setDate(d.getDate() + days)
+  return d.toISOString().split('T')[0]
+}

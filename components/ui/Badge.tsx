@@ -34,6 +34,25 @@ const STATUS_MAP: Record<string, string> = {
   'High':        'bg-red-100 text-red-700 ring-1 ring-red-200',
   'Medium':      'bg-amber-100 text-amber-700 ring-1 ring-amber-200',
   'Low':         'bg-slate-100 text-slate-600 ring-1 ring-slate-200',
+  // Delivery
+  'Delivered':         'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
+  'In Transit':        'bg-blue-100 text-blue-700 ring-1 ring-blue-200',
+  'Received':          'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
+  // Supply chain performance
+  'On Time':           'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
+  'Early':             'bg-blue-100 text-blue-700 ring-1 ring-blue-200',
+  'Delayed':           'bg-red-100 text-red-700 ring-1 ring-red-200',
+  // Sales units
+  'Sold':              'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
+  'Reserved':          'bg-purple-100 text-purple-700 ring-1 ring-purple-200',
+  'Available':         'bg-slate-100 text-slate-600 ring-1 ring-slate-200',
+  'Under Construction':'bg-amber-100 text-amber-700 ring-1 ring-amber-200',
+  // Investment types
+  'Equity':            'bg-purple-100 text-purple-700 ring-1 ring-purple-200',
+  'Bank Loan':         'bg-amber-100 text-amber-700 ring-1 ring-amber-200',
+  'Government Grant':  'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
+  'Bond':              'bg-blue-100 text-blue-700 ring-1 ring-blue-200',
+  'Venture Capital':   'bg-pink-100 text-pink-700 ring-1 ring-pink-200',
 }
 
 export default function Badge({ status, className }: { status: string; className?: string }) {
