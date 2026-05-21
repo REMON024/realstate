@@ -3,6 +3,7 @@ import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
 import ProgressBar from '@/components/ui/ProgressBar'
 import StatCard from '@/components/ui/StatCard'
+import Link from 'next/link'
 import {
   FolderKanban, Plus, Search, Filter, Download,
   MapPin, Users, Calendar, DollarSign, HardHat,
@@ -94,7 +95,7 @@ export default function ProjectsPage() {
                         <HardHat className="w-4 h-4" />
                       </div>
                       <div>
-                        <p className="font-semibold text-slate-800 text-[13px]">{p.name}</p>
+                        <Link href={`/projects/${p.id}`} className="font-semibold text-slate-800 text-[13px] hover:text-orange-600 transition-colors">{p.name}</Link>
                         <p className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
                           <MapPin className="w-2.5 h-2.5" />
                           {p.location.split(',').slice(-2).join(',').trim()}
@@ -140,9 +141,9 @@ export default function ProjectsPage() {
                   <td className="table-cell"><Badge status={p.status} /></td>
                   <td className="table-cell">
                     <div className="flex items-center gap-1">
-                      <button className="w-7 h-7 rounded-lg hover:bg-blue-50 flex items-center justify-center transition-colors" title="View">
+                      <Link href={`/projects/${p.id}`} className="w-7 h-7 rounded-lg hover:bg-blue-50 flex items-center justify-center transition-colors" title="View">
                         <Eye className="w-3.5 h-3.5 text-blue-500" />
-                      </button>
+                      </Link>
                       <button className="w-7 h-7 rounded-lg hover:bg-amber-50 flex items-center justify-center transition-colors" title="Edit">
                         <Edit className="w-3.5 h-3.5 text-amber-500" />
                       </button>
